@@ -1,19 +1,16 @@
 import { TaskForm } from "@/app/new/task-Form";
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
+//import { PageProps } from "@/app/types";
 
-interface PageProps {
-  params: { id: string };
-}
+export default async function TaskPageEdit({params}: {params: Promise<{ id: string }>}) {
 
-export default async function TaskPageEdit({ params }: PageProps) {
-  const task = await prisma.task.findFirst({
-    where: { id: parseInt(params.id) },
-  });
-
+  const { id } = await params; 
+ const task = await prisma.task.findFirst({ 
+    where: { id: parseInt(id) }
+  })
   if (!task) {
-    redirect("/");
-  }
+    redirect("/");}
 
   console.log(task);
   return (

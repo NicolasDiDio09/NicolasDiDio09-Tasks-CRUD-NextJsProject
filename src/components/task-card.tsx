@@ -9,6 +9,12 @@ import { TaskButtonDelete } from './task-button-delete';
 import Link from 'next/link';
 
 function TaskCard({task}:{task:Task}) {
+
+    if (!task.id) {
+    console.error("Task ID is missing");
+    return null;
+  }
+  
   return (
     <div>
       <Card >
